@@ -60,11 +60,9 @@ export default function SupportNotebook() {
 
   if (isCompleted) {
     const encouragements = [
-      "今日のあなたは素晴らしいです ✨",
-      "一歩ずつ前に進んでいますね 🌸",
-      "あなたの笑顔がきっと誰かの力になります 😊",
-      "今この瞬間、あなたは成長しています 🌱",
-      "心に花を咲かせてくださいね 🌺"
+      "キンタマがあなたを強くする ✨",
+      "へんちゃいうさぎ見たくない？ 🌸",
+      "キンタマリンバ 😊",
     ];
     
     const randomEncouragement = encouragements[Math.floor(Math.random() * encouragements.length)];
@@ -74,25 +72,52 @@ export default function SupportNotebook() {
         <div className="max-w-2xl mx-auto py-8">
           <h1 className="text-3xl font-bold text-center mb-8 text-pink-800">寄り添いノート</h1>
           
-          <div className="text-center space-y-6">
+          <div className="space-y-6">
             <EmpatheticMessage step={4} />
             
-            <div className="bg-white rounded-lg p-8 shadow-lg border border-pink-100">
+            {/* 入力内容の振り返り */}
+            {submittedData && (
+              <div className="bg-white rounded-lg p-8 shadow-lg border border-pink-100">
+                <h2 className="text-xl font-bold text-pink-800 mb-6 text-center">あなたが整理した気持ち</h2>
+                
+                <div className="space-y-6">
+                  <div className="border-l-4 border-pink-300 pl-4">
+                    <h3 className="font-semibold text-pink-700 mb-2">📝 起きたこと</h3>
+                    <p className="text-gray-700 leading-relaxed">{submittedData.situation}</p>
+                  </div>
+                  
+                  <div className="border-l-4 border-rose-300 pl-4">
+                    <h3 className="font-semibold text-rose-700 mb-2">💭 感じた気持ち</h3>
+                    <p className="text-gray-700 leading-relaxed">{submittedData.feelings}</p>
+                  </div>
+                  
+                  <div className="border-l-4 border-orange-300 pl-4">
+                    <h3 className="font-semibold text-orange-700 mb-2">🌟 理想の状況</h3>
+                    <p className="text-gray-700 leading-relaxed">{submittedData.desires}</p>
+                  </div>
+                </div>
+              </div>
+            )}
+            
+            <div className="bg-white rounded-lg p-8 shadow-lg border border-pink-100 text-center">
               <div className="text-6xl mb-4">🌈</div>
               <h2 className="text-2xl font-bold text-pink-800 mb-4">元気になるおまじない</h2>
               <p className="text-xl text-pink-700 mb-6">{randomEncouragement}</p>
               <p className="text-gray-600">気持ちを整理できました。また必要な時はいつでも戻ってきてくださいね。</p>
             </div>
             
-            <button
-              onClick={() => {
-                setCurrentStep(1);
-                setIsCompleted(false);
-              }}
-              className="bg-pink-500 hover:bg-pink-600 text-white font-medium py-3 px-8 rounded-full transition-colors shadow-md"
-            >
-              もう一度始める
-            </button>
+            <div className="text-center">
+              <button
+                onClick={() => {
+                  setCurrentStep(1);
+                  setIsCompleted(false);
+                  setSubmittedData(null);
+                }}
+                className="bg-pink-500 hover:bg-pink-600 text-white font-medium py-3 px-8 rounded-full transition-colors shadow-md"
+              >
+                もう一度始める
+              </button>
+            </div>
           </div>
         </div>
       </div>
